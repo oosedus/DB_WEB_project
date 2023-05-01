@@ -60,5 +60,5 @@ database = "db_web_project"
 engine = create_engine(f"mysql+mysqldb://{user}:{password}@127.0.0.1:3306/{database}",
                        connect_args={'charset':'utf8'})
 conn = engine.connect
-df.to_sql(name='bbbbbbb', con=engine, if_exists='append', index=False)
+df.to_sql(name='first_df', con=engine, if_exists='append', index=False)
 engine.dispose()
