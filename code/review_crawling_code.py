@@ -193,8 +193,5 @@ for MGT, name in zip(first_df['UNIQUE_KEY'], first_df['NAME_AND_DONG']):
     # Go back to the search page
     driver.back()
 
-    print(num)
-    num = num+1
-
 # Close the database connection
 connect.close()
