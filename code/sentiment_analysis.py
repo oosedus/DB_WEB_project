@@ -102,6 +102,22 @@ review = spark.read.format("csv").option("header", "false")\
     .option("inferSchema", "false")\
     .load("hdfs://54.252.183.196:8020/home/hadoop/review_df/part-m-00000")
 
+# 컬럼 타입 변환
+review = review.withColumn("_c3", review["_c3"].cast(StringType()))
+
+# null 값을 다른 값으로 대체
+replacement_values = {"_c0": "N/A", "_c1": "N/A", "_c2": "N/A", "_c3": "N/A"}
+review = review.fillna(replacement_values)
+
+# 이모티콘 제거하여 새로운 컬럼 생성
+review = review.withColumn("cleaned_review", remove_special_chars_udf(review["_c3"]))
+
+# 학습된 모델을 사용하여 테스트 데이터 예측
+pred_score = lr_model.transform(review)
+
+tmp_df = pred_score.select("_c0","_c3","prediction")
+tmp_df = tmp_df.withColumn("prediction", col("prediction").cast(StringType()))
+
 output_path = "hdfs://54.252.183.196:8020/home/hadoop/real_review_df/"
 
 from pyspark.sql.functions import monotonically_increasing_id
