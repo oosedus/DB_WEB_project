@@ -55,17 +55,8 @@ for i in range(1000, total_count+1, 1000):
     engine = create_engine(f"mysql+mysqldb://{user}:{password}@172.31.21.49:3306/{database}",
                            connect_args={'charset':'utf8'})
     conn = engine.connect
-    df.to_sql(name='dldldldl', con=engine, if_exists='append', index=False)
+    df.to_sql(name='gonggong_original', con=engine, if_exists='append', index=False)
     engine.dispose()
-    print(f"{i}in table dldldldl")
+    print(f"{i}in table gonggong_original")
     #print(f"{result_list.__len__()} in gonggong")
-
-
-# DataFrame 생성
-
-
-# MySQL 데이터베이스에 DataFrame 저장
-
-
-# MySQL 서버 연결 설정
 
