@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_2540d502987a4e4c4269a49baa55cd1e {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_2540d502987a4e4c4269a49baa55cd1e" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_2540d502987a4e4c4269a49baa55cd1e = L.map(
+                "map_2540d502987a4e4c4269a49baa55cd1e",
+                {
+                    center: [37.566659527, 126.978346859],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 12,
+                    zoomControl: true,
+                    preferCanvas: false,
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_353e07b0a7c4174e39d77e3b196503f1 = L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "Data by \u0026copy; \u003ca target=\"_blank\" href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e, under \u003ca target=\"_blank\" href=\"http://www.openstreetmap.org/copyright\"\u003eODbL\u003c/a\u003e.", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map_2540d502987a4e4c4269a49baa55cd1e);
+        
+    
+            var marker_46c401c49557c8fe048c4489d1921d43 = L.marker(
+                [37.56307782593468, 126.97481840913964],
+                {}
+            ).addTo(map_2540d502987a4e4c4269a49baa55cd1e);
+        
+    
+            var icon_59a7fbb1bacc8515f3b7b366d4823216 = L.AwesomeMarkers.icon(
+                {"extraClasses": "fa-rotate-0", "icon": "glyphicon glyphicon-cutlery", "iconColor": "white", "markerColor": "red", "prefix": "glyphicon"}
+            );
+            marker_46c401c49557c8fe048c4489d1921d43.setIcon(icon_59a7fbb1bacc8515f3b7b366d4823216);
+        
+    
+        var popup_a4422a08dcc171078f96fef8eb1c7bd3 = L.popup({"maxWidth": "100%"});
+
+        
+            
+                var html_53859b0a97ba12cc9216581458d0b219 = $(`<div id="html_53859b0a97ba12cc9216581458d0b219" style="width: 100.0%; height: 100.0%;">['풍년 닭도리탕', 19800]</div>`)[0];
+                popup_a4422a08dcc171078f96fef8eb1c7bd3.setContent(html_53859b0a97ba12cc9216581458d0b219);
+            
+        
+
+        marker_46c401c49557c8fe048c4489d1921d43.bindPopup(popup_a4422a08dcc171078f96fef8eb1c7bd3)
+        ;
+
+        
+    
+</script>
+</html>

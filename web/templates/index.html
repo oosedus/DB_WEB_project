@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link
+            href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap"
+            rel="stylesheet">
+        <link
+            href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+            rel="stylesheet"
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+        <!-- <link rel="stylesheet" type="text/css" href="{{ url_for('static',
+        filename='css/style.css') }}"> -->
+        <link href="/static/css/input.css" rel="stylesheet">
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <title>Seoulres</title>
+        <style>
+            * {
+                font-family: 'Gowun Dodum', sans-serif;
+
+            }
+
+            .mytitle {
+                width: 100%;
+                height: 200px;
+
+                background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA4MTdfNDkg%2FMDAxNTM0NDgxMDE1MDI5.eOW94l4hLZ6JhjR4ayMSl0MQ-pjOzZPl7cADV2yK9uEg.-mVW_ZdMiUIriuNxncAU5NlXY0bEo7s9NcDHbp3PlSwg.JPEG.t_injswuwe2j%2F24_%25B3%25B2%25BB%25EA%25C5%25B8%25BF%25F6_ss.jpg&type=sc960_832");
+                background-position: center;
+                background-size: cover;
+
+                color: white;
+
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                justify-content: center;
+                padding-right: 20px;
+            }
+
+            .mytitle > button {
+                width: 200px;
+                height: 50px;
+
+                background-color: transparent;
+                color: white;
+
+                border-radius: 50px;
+                border: 1px solid white;
+
+                margin-top: 10px;
+            }
+
+            .mytitle > button:hover {
+                border: 2px solid white;
+            }
+
+            .first-section {
+                padding: 10px;
+                background-color: rgb(255, 239, 199);
+                display: flex;
+                align-items: center;
+            }
+
+            .second-section {
+                width: 75%;
+                height: 100%;
+
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                flex-direction: column;
+            }
+            .center-side {
+
+                /* float: left; */
+                width: 100%;
+                height: 60%;
+
+                padding: 10px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .center-lower-side,
+            .center-upper-side {
+                float: left;
+                width: 49%;
+                height: 100%;
+                /* border: 1px solid #000; */
+                padding: 10px;
+                border-radius: 10px;
+                background-color: rgb(255, 251, 231);
+                margin: 5px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                display: flex;
+                justify-content: space-between;
+
+                flex-direction: column;
+                align-items: center;
+                /* align-items: center;
+    width: 49%;
+    height: 90%;
+    gap: 10px; */
+
+            }
+
+            .left-side {
+
+                float: left;
+                width: 24%;
+                height: 100%;
+
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                /* text-align: center; */
+            }
+
+            .sickdang_info {
+
+                padding: 10px;
+                border-radius: 10px;
+                background-color: rgb(255, 251, 231);
+                margin-top: 10px;
+                width: 85%;
+                height: 40%;
+
+                /* 요소를 위쪽으로 정렬 */
+            }
+
+            .right-side {
+
+                width: 100%;
+                height: 35%;
+
+                display: flex;
+
+                align-items: center;
+                /* flex-direction: column-reverse; */
+            }
+
+            .barplot_style {
+                float: left;
+
+                width: 60%;
+                height: 100%;
+                overflow-x: scroll;
+                white-space: nowrap;
+                padding: 10px;
+                border-radius: 10px;
+                background-color: rgb(255, 251, 231);
+                margin-top: 10px;
+                flex-direction: column;
+                align-items: center;
+
+            }
+            .barplot_style img {
+
+                width: auto;
+                height: 100%;
+            }
+
+            .menu {
+                width: 35%;
+                height: 100%;
+                border-radius: 10px;
+                margin: 25px;
+                background-color: rgb(255, 251, 231);
+                overflow-y: auto;
+                /* 세로 스크롤바 표시 */
+            }
+
+            .menu table {
+                width: 100%;
+                border-collapse: collapse;
+            }
+
+            .menu td,
+            .menu th {
+                padding: 10px;
+                border: 1px solid #ccc;
+            }
+
+            .menu th {
+                background-color: #f5f5f5;
+                font-weight: bold;
+            }
+
+            .menu tbody tr:nth-child(even) {
+                background-color: #f9f9f9;
+            }
+
+            .box_info {
+                margin: 20px auto 0;
+                width: 20%;
+                height: 40%;
+                /* max-width: 1200px; */
+
+            }
+
+            .box_wc {
+                /* display: flex; */
+                /* justify-content: center; */
+                /* margin: 10px, 10px, 10px, 10px; */
+                /* padding: 10px, 10px, 10px, 10px; */
+                align-self: center;
+
+                margin: auto;
+                width: 45%;
+                height: 80%;
+
+                position: relative;
+
+                /* padding: 10px; */
+                border-radius: 10px;
+                background-color: rgb(251, 242, 195);
+                /* display: flex; */
+                /* flex-basis: 60%; */
+                margin: 5px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                /* width: 45%;
+    height: 85%;
+    max-width: 550px;
+    position: relative;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgb(251, 242, 195); */
+
+            }
+
+            .box_wc:nth-child(2) {
+                margin-left: 10px;
+            }
+
+            .box_wc img {
+                max-width: 95%;
+                max-height: 98%;
+                object-fit: contain;
+                border-radius: 10px;
+                align-self: ceter;
+            }
+
+            /* .wc_place {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+} */
+
+            .inner_box {
+                align-self: center;
+
+                margin: auto;
+                width: 97%;
+                height: 88%;
+
+                position: relative;
+
+                /* padding: 10px; */
+                border-radius: 10px;
+                background-color: rgb(251, 242, 195);
+                /* display: flex; */
+                /* flex-basis: 60%; */
+                margin: 5px;
+
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            .wc_big_title {
+                text-align: center;
+                margin-top: 0;
+            }
+
+            .wc_title {
+                text-align: center;
+                font-weight: bold;
+                margin-bottom: 2px;
+            }
+
+            .box_map {
+
+                width: 100%;
+                height: 60%;
+
+                padding: 10px;
+                border-radius: 10px;
+                background-color: rgb(255, 251, 231);
+                margin-top: 10px;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+
+            }
+            .text_white {
+                text-decoration-color: antiquewhite;
+
+            }
+            .mycards {
+                margin: 20px auto 0;
+                width: 95%;
+                max-width: 1200px;
+                border: 1px solid #000;
+            }
+
+            .mypost {
+                width: 95%;
+                max-width: 500px;
+                margin: 20px auto 0;
+                padding: 20px;
+                box-shadow: 0 0 3px 0 gray;
+                border: 1px solid #000;
+
+                display: none;
+            }
+
+            .mybtns {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+
+                margin-top: 20px;
+            }
+
+            .mybtns > button {
+                margin-right: 10px;
+            }
+
+            .flex-container {
+                display: flex;
+                flex-wrap: wrap;
+                
+                justify-content: space-between;
+                
+                width: 100%;
+                
+                height: 500px;
+                
+                gap: 10px;
+            }
+
+            .container {
+                display: flex;
+                /* grid-template-columns: repeat(3, 1fr); */
+                /* grid-template-rows: repeat(2, 1fr); */
+                gap: 10px;
+                width: 1400px;
+                
+                height: 500px;
+                
+            }
+
+            .box {
+                border: 1px solid #000;
+                padding: 10px;
+
+                text-align: center;
+                border: 1px solid #000;
+            }
+
+            .box_info {
+                border: 1px solid #000;
+                padding: 10px;
+            }
+
+            */ .masonry-box:hover img,
+            .post-media:hover img {
+                -webkit-transform: scale(1.1);
+                -moz-transform: scale(1.1);
+                -ms-transform: scale(1.1);
+                -o-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            #cards-box {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+
+            .small-box {
+                width: 50%;
+                float: left;
+            }
+
+            .masonry-box .blog-meta span {
+                background-color: #111111;
+                border-radius: 3px;
+                font-size: 12px;
+                padding: 0.1rem 1rem;
+            }
+        </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+
+            function get_values() {
+                var sickdang = $('#sickdang_input').val();
+                var dong = $('#dong_input').val();
+                $.ajax({
+                    type: "POST",
+                    url: "/test",
+                    data: {
+                        sickdang: sickdang,
+                        dong: dong
+                    },
+                    success: function (response) {
+
+                        $('#uniqueKey').text(response.unique_key);
+                        $('#state').text(response.state);
+                        $('#fullAddress').text(response.full_address);
+                        $('#name').text(response.name);
+                        $('#type').text(response.type);
+                        $('#dong').text(response.dong);
+                        $('#wc').text(response.have_wc);
+                        $('#map').text(response.have_map);
+
+                        var have_wc = response.have_wc;
+                        var have_map = response.have_map;
+                        var menus = response.menus;
+
+                        if (have_wc == 1) {
+
+                            var star_positive = '/static/star_positive.png?' + new Date().getTime();
+                            var star_negative = '/static/star_negative.png?' + new Date().getTime();
+                            var model_positive = '/static/model_positive.png?' + new Date().getTime();
+                            var model_negative = '/static/model_negative.png?' + new Date().getTime();
+                            $('#star_positive').attr('src', star_positive);
+                            $('#star_negative').attr('src', star_negative);
+                            $('#model_positive').attr('src', model_positive);
+                            $('#model_negative').attr('src', model_negative);
+                        }
+
+                        if (have_map == 1) {
+                            $('#map_frame').attr('src', "{{ url_for('static', filename='map.html') }}");
+
+                            var barplot = '/static/bar_plot.png?' + new Date().getTime();
+                            $('#barplot').attr('src', barplot);
+                            // $('#barplot').attr('src', '/static/bar_plot.png'); <iframe id="map_frame"
+                            // src="{{ url_for('static', filename='map.html') }}"></iframe>
+                        }
+
+                        if (menus != 0) {
+                            menu_table = convertJSONToHTML(menus);
+                            $('#menu_table')
+                                .html(menu_table)
+                                .addClass('menu');
+
+                        }
+                    }
+                });
+            }
+
+            function convertJSONToHTML(data) {
+                var html = '<table border="1">';
+                html += '<thead><tr>';
+
+                for (var key in data[0]) {
+                    html += '<th>' + key + '</th>';
+                }
+
+                html += '</tr></thead><tbody>';
+
+                for (var i = 0; i < data.length; i++) {
+                    html += '<tr>';
+
+                    for (var key in data[i]) {
+                        html += '<td>' + data[i][key] + '</td>';
+                    }
+
+                    html += '</tr>';
+                }
+
+                html += '</tbody></table>';
+
+                return html;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="mytitle">
+
+            <h1>Seoul:res</h1>
+            <h6>please input restaurant you want to analyze
+            </h6>
+            <div>
+                <input type="text" id="sickdang_input" placeholder="restaurant name : ">
+                <input type="text" id="dong_input" placeholder="town : ex. 공릉동">
+                <button onclick="get_values()" class="mybutton">
+                    search
+                </button>
+            </div>
+        </div>
+        <section class="section first-section">
+
+            <div class="flex-container">
+                <div class="left-side">
+                    <div class="sickdang_info">
+                        <style>
+                            p {
+                                margin-bottom: 1;
+                                padding-top: 1;
+                            }
+                        </style>
+                        <p align="center" style="font-size: 13px;">***Restaurant Information***</p1>
+                        <p>Name:
+                            <span id="name"></span></p>
+                        <p style="font-size: 12px;">State:
+                            <span id="state"></span></p>
+                        <p style="font-size: 12px;">Full Address:
+                            <span id="fullAddress"></span></p>
+                        <p style="font-size: 12px;">Type:
+                            <span id="type"></span></p>
+                    </div>
+
+                    <div class="box_map">
+                        <div class="inner_box">
+                            <iframe
+                                id="map_frame"
+                                src=""
+                                style="width: 100%; height: 100%; border-radius: 10px;"></iframe>
+
+                        </div>
+                        <p class="wc_title">Map</p>
+                    </div>
+                </div>
+
+                <div class="second-section">
+                    <div class="center-side">
+
+                        <div class="center-upper-side">
+
+                            <div class="box_wc masonry-box">
+                                <img id="star_positive" src="" alt="" class="wc_place">
+                            </div>
+                            <p class="wc_title">Positive (Star review)</p>
+
+                            <div class="box_wc masonry-box">
+                                <img id="star_negative" src="" alt="" class="wc_place">
+                            </div>
+                            <p class="wc_title">Negative (Star review)</p>
+
+                        </div>
+
+                        <div class="center-lower-side">
+
+                            <div class="box_wc masonry-box">
+                                <img id="model_positive" src="" alt="" class="wc_place">
+
+                            </div>
+                            <p class="wc_title">Positive (Sensitive analysis)</p>
+
+                            <div class="box_wc masonry-box">
+                                <img id="model_negative" src="" alt="" class="wc_place">
+                            </div>
+                            <p class="wc_title">Negative (Sensitive analysis)</p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="right-side">
+
+                        <div class="barplot_style">
+                            <img id="barplot" src="" alt="Bar Plot">
+                        </div>
+
+                        <div class="menu" id="menu_table"></div>
+
+                    </div>
+                </div>
+            </div>
+        </body>
+    </section>
+</html>
